@@ -23,8 +23,8 @@ public class KortSamling {
 	public KortSamling() {
 		
 		// TODO - START
-		
-		throw new UnsupportedOperationException(TODO.constructor("KortSamling"));
+		samling = new Kort[MAKS_KORT];
+	
 		// TODO - END
 	}
 
