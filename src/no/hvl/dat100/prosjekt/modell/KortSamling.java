@@ -86,10 +86,17 @@ public class KortSamling {
 	public void leggTil(Kort kort) {
 
 		// TODO - START
-
-		throw new UnsupportedOperationException(TODO.method());
+		int ledigPlassIndex = 0;
+		//sjekker første ledige index i arrayen
+		for(int i = 0; i< samling.length;i++) {
+			if(samling[i]== null) {
+				ledigPlassIndex = i;
+				break;
+			}
+		}
+		samling[ledigPlassIndex] = kort;
+		// denne metoden vil alltid legge til nytt kort i index 0 dersom kortstokken er full
 		// TODO - END
-
 	}
 
 	/**
