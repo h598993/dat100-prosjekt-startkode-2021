@@ -22,10 +22,10 @@ public class KortSamling {
 	 */
 	public KortSamling() {
 
-		// TODO - START
+		//  START
 		samling = new Kort[MAKS_KORT];
 
-		// TODO - END
+		//  END
 	}
 
 	/**
@@ -57,7 +57,7 @@ public class KortSamling {
 			}
 		}
 		return teller;
-		// TODO - END
+		//  END
 	}
 
 	/**
@@ -74,7 +74,7 @@ public class KortSamling {
 		}
 		return true;
 
-		// TODO - END
+		//  END
 	}
 
 	/**
@@ -84,7 +84,7 @@ public class KortSamling {
 	 */
 	public void leggTil(Kort kort) {
 
-		// TODO - START
+		// START
 		int ledigPlassIndex = 0;
 		// sjekker f�rste ledige index i arrayen
 		for (int i = 0; i < samling.length; i++) {
@@ -96,7 +96,7 @@ public class KortSamling {
 		samling[ledigPlassIndex] = kort;
 		// denne metoden vil alltid legge til nytt kort i index 0 dersom kortstokken er
 		// full
-		// TODO - END
+		// END
 	}
 
 	/**
@@ -105,7 +105,7 @@ public class KortSamling {
 	 */
 	public void leggTilAlle() {
 
-		// TODO - START
+		//  START
 		int teller = 0;
 		for (Kortfarge farge : Kortfarge.values()) {
 			for (int i = 1; i < Regler.MAKS_KORT_FARGE + 1; i++) {
@@ -115,7 +115,7 @@ public class KortSamling {
 			}
 		}
 		// Husk: bruk Regler.MAKS_KORT_FARGE for å få antall kort per farge
-		// TODO - END
+		//  END
 	}
 
 	/**
@@ -123,11 +123,11 @@ public class KortSamling {
 	 */
 	public void fjernAlle() {
 
-		// TODO - START
+		//  START
 
 		samling = new Kort[MAKS_KORT];
 
-		// TODO - END
+		//  END
 	}
 
 	/**
@@ -138,7 +138,7 @@ public class KortSamling {
 	 */
 	public Kort seSiste() {
 
-		// TODO - START
+		//  START
 		for (int i = (MAKS_KORT - 1); i >= 0; i--) {
 			if (!(samling[i] == null)) {
 				return samling[i];
@@ -154,7 +154,7 @@ public class KortSamling {
 	 */
 	public Kort taSiste() {
 
-		// TODO - START
+		//  START
 
 		for (int i = (MAKS_KORT - 1); i >= 0; i--) {
 			if (!(samling[i] == null)) {
@@ -165,7 +165,7 @@ public class KortSamling {
 		}
 		return null;
 
-		// TODO - END
+		//  END
 	}
 
 	/**
@@ -177,7 +177,7 @@ public class KortSamling {
 	 */
 	public boolean har(Kort kort) {
 
-		// TODO - START
+		//  START
 		if (kort == null) {
 			return false;
 		}
@@ -195,7 +195,7 @@ public class KortSamling {
 
 		return harKort;
 		// return false;
-		// TODO - END
+		//  END
 
 	}
 
@@ -210,7 +210,7 @@ public class KortSamling {
 
 	public boolean fjern(Kort kort) {
 
-		// TODO - START
+		//  START
 		// Sjekker at man faktisk gir et kort som parameter
 		if (kort == null) {
 			return false;
@@ -227,7 +227,7 @@ public class KortSamling {
 
 		return false;
 
-		// TODO - END
+		//  END
 	}
 
 	/**
@@ -238,15 +238,18 @@ public class KortSamling {
 	 */
 	public Kort[] getAllekort() {
 
-		// TODO - START
+		//  START
+		int kortstokkTeller = 0;
+		Kort[] kortstokk = new Kort[getAntalKort()];
+		for(int i = 0; i <samling.length;i++) {
+			if(!(samling[i]== null)) {
+				kortstokk[kortstokkTeller] = samling[i];
+				kortstokkTeller++;
+			}
+		}
+		return kortstokk;
 
-		
-		
-		
-		
-		throw new UnsupportedOperationException(TODO.method());
-
-		// TODO - END
+		//  END
 
 	}
 
