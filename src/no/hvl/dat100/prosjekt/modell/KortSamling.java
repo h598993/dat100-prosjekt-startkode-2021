@@ -3,6 +3,7 @@ package no.hvl.dat100.prosjekt.modell;
 import no.hvl.dat100.prosjekt.TODO;
 import no.hvl.dat100.prosjekt.kontroll.dommer.Regler;
 
+// test
 /**
  * Struktur for å lagre ei samling kort. Kan lagre hele kortstokken. Det finnes
  * en konstant i klassen Regler som angir antall kort i hver av de 4 fargene.
