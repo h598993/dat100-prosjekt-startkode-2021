@@ -22,10 +22,10 @@ public class KortSamling {
 	 */
 	public KortSamling() {
 
-		//  START
+		// START
 		samling = new Kort[MAKS_KORT];
 
-		//  END
+		// END
 	}
 
 	/**
@@ -38,7 +38,7 @@ public class KortSamling {
 	 * @return tabell av kort.
 	 */
 	public Kort[] getSamling() {
-
+		
 		return samling;
 
 	}
@@ -57,7 +57,7 @@ public class KortSamling {
 			}
 		}
 		return teller;
-		//  END
+		// END
 	}
 
 	/**
@@ -74,7 +74,7 @@ public class KortSamling {
 		}
 		return true;
 
-		//  END
+		// END
 	}
 
 	/**
@@ -105,7 +105,7 @@ public class KortSamling {
 	 */
 	public void leggTilAlle() {
 
-		//  START
+		// START
 		int teller = 0;
 		for (Kortfarge farge : Kortfarge.values()) {
 			for (int i = 1; i < Regler.MAKS_KORT_FARGE + 1; i++) {
@@ -115,7 +115,7 @@ public class KortSamling {
 			}
 		}
 		// Husk: bruk Regler.MAKS_KORT_FARGE for Ã¥ fÃ¥ antall kort per farge
-		//  END
+		// END
 	}
 
 	/**
@@ -123,11 +123,11 @@ public class KortSamling {
 	 */
 	public void fjernAlle() {
 
-		//  START
+		// START
 
 		samling = new Kort[MAKS_KORT];
 
-		//  END
+		// END
 	}
 
 	/**
@@ -138,7 +138,7 @@ public class KortSamling {
 	 */
 	public Kort seSiste() {
 
-		//  START
+		// START
 		for (int i = (MAKS_KORT - 1); i >= 0; i--) {
 			if (!(samling[i] == null)) {
 				return samling[i];
@@ -154,7 +154,7 @@ public class KortSamling {
 	 */
 	public Kort taSiste() {
 
-		//  START
+		// START
 
 		for (int i = (MAKS_KORT - 1); i >= 0; i--) {
 			if (!(samling[i] == null)) {
@@ -165,7 +165,7 @@ public class KortSamling {
 		}
 		return null;
 
-		//  END
+		// END
 	}
 
 	/**
@@ -177,7 +177,7 @@ public class KortSamling {
 	 */
 	public boolean har(Kort kort) {
 
-		//  START
+		// START
 		if (kort == null) {
 			return false;
 		}
@@ -195,7 +195,7 @@ public class KortSamling {
 
 		return harKort;
 		// return false;
-		//  END
+		// END
 
 	}
 
@@ -210,12 +210,13 @@ public class KortSamling {
 
 	public boolean fjern(Kort kort) {
 
-		//  START
+		// START
 		// Sjekker at man faktisk gir et kort som parameter
 		if (kort == null) {
 			return false;
 		}
-		//Sjekker at posisjonen i samling ikke er null før vi sjekker om kortet matcher. Om det matcher setter vi verdien til null. 
+		// Sjekker at posisjonen i samling ikke er null før vi sjekker om kortet
+		// matcher. Om det matcher setter vi verdien til null.
 		for (int i = 0; i < samling.length; i++) {
 			if (!(samling[i] == null)) {
 				if (samling[i].getFarge() == kort.getFarge() && samling[i].getVerdi() == kort.getVerdi()) {
@@ -227,7 +228,7 @@ public class KortSamling {
 
 		return false;
 
-		//  END
+		// END
 	}
 
 	/**
@@ -238,18 +239,18 @@ public class KortSamling {
 	 */
 	public Kort[] getAllekort() {
 
-		//  START
+		// START
 		int kortstokkTeller = 0;
 		Kort[] kortstokk = new Kort[getAntalKort()];
-		for(int i = 0; i <samling.length;i++) {
-			if(!(samling[i]== null)) {
+		for (int i = 0; i < samling.length; i++) {
+			if (!(samling[i] == null)) {
 				kortstokk[kortstokkTeller] = samling[i];
 				kortstokkTeller++;
 			}
 		}
 		return kortstokk;
 
-		//  END
+		// END
 
 	}
 

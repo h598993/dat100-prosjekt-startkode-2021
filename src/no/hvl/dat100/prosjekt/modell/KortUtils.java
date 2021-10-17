@@ -1,5 +1,6 @@
 package no.hvl.dat100.prosjekt.modell;
 
+import java.util.Arrays;
 import java.util.Random;
 
 import no.hvl.dat100.prosjekt.TODO;
@@ -11,30 +12,66 @@ public class KortUtils {
 	 * 
 	 * @see Kort
 	 * 
-	 * @param samling
-	 * 			samling av kort som skal sorteres. 
+	 * @param samling samling av kort som skal sorteres.
 	 */
-	
+
 	public static void sorter(KortSamling samling) {
-		
-		// TODO - START
-		
-		throw new UnsupportedOperationException(TODO.method());
-		// TODO - END
+
+		// START
+		Kort[] usortertTab = samling.getAllekort();
+		Kort[] sortertTab = new Kort[usortertTab.length];
+
+		// kopierer over i ny tabell
+		for (int i = 0; i < usortertTab.length; i++) {
+			sortertTab[i] = usortertTab[i];
+		}
+		// fjerner alt i orginalen
+		samling.fjernAlle();
+		// sorterer tabellen
+		Arrays.sort(sortertTab);
+		// legger sortert korttokk tilbake i samlingen
+
+		for (int i = 0; i < sortertTab.length; i++) {
+			samling.leggTil(sortertTab[i]);
+		}
+		// END
 	}
-	
+
 	/**
-	 * Stokkar en kortsamling. 
+	 * Stokkar en kortsamling.
 	 * 
-	 * @param samling
-	 * 			samling av kort som skal stokkes. 
+	 * @param samling samling av kort som skal stokkes.
 	 */
 	public static void stokk(KortSamling samling) {
-		
-		// TODO - START
-		
-		throw new UnsupportedOperationException(TODO.method());
-		// TODO - END
+
+		// START
+		Random rand = new Random();
+
+		Kort[] kortstokk = samling.getAllekort();
+		Kort[] hjelpestokk = new Kort[kortstokk.length];
+		// går gjennom kortstokken og bytter plassering på kortene.
+		for (int i = 0; i < kortstokk.length; i++) {
+
+			int r = i + rand.nextInt(kortstokk.length - i);
+
+			Kort hjelpeVariabel = kortstokk[r];
+			kortstokk[r] = kortstokk[i];
+			kortstokk[i] = hjelpeVariabel;
+		}
+		// kopierer den ferdig stokkede kortstokken i en midlertidig stokk.
+		for (int i = 0; i < kortstokk.length; i++) {
+			hjelpestokk[i] = kortstokk[i];
+		}
+
+		// fjerner den opprinnelige stokken
+		samling.fjernAlle();
+		// legger til ferdig stokket kortstokk til samlingen, fra den midlertidige
+		// stokken
+		for (int i = 0; i < hjelpestokk.length; i++) {
+			samling.leggTil(hjelpestokk[i]);
+		}
+
+		// END
 	}
-	
+
 }
