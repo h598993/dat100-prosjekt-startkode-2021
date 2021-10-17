@@ -1,5 +1,7 @@
 package no.hvl.dat100.prosjekt.modell;
 
+import java.util.Arrays;
+
 import no.hvl.dat100.prosjekt.TODO;
 import no.hvl.dat100.prosjekt.kontroll.dommer.Regler;
 
@@ -23,21 +25,22 @@ public class KortSamling {
 	public KortSamling() {
 
 		samling = new Kort[MAKS_KORT];
+		antall = 0;
 
 	}
 
 	/**
-	 * Returnerer en tabell med kortene i samlinga. Tabellen trenger ikke være
-	 * full. Kortene ligger sammenhengende fra starten av tabellen. Kan få tilgang
-	 * til antallet ved å bruke metoden getAntallKort(). Metoden er først og
-	 * fremst ment å brukes i testklasser. Om man trenger kortene utenfor,
-	 * anbefales metoden getAlleKort().
+	 * Returnerer en tabell med kortene i samlinga. Tabellen trenger ikke være full.
+	 * Kortene ligger sammenhengende fra starten av tabellen. Kan få tilgang til
+	 * antallet ved å bruke metoden getAntallKort(). Metoden er først og fremst ment
+	 * å brukes i testklasser. Om man trenger kortene utenfor, anbefales metoden
+	 * getAlleKort().
 	 * 
 	 * @return tabell av kort.
 	 */
 	public Kort[] getSamling() {
 
-		return samling;
+		return Arrays.copyOf(samling, samling.length);
 
 	}
 
@@ -48,14 +51,7 @@ public class KortSamling {
 	 */
 	public int getAntalKort() {
 
-		int teller = 0;
-		for (int i = 0; i < samling.length; i++) {
-			if (!(samling[i] == null)) {
-				teller++;
-			}
-		}
-		return teller;
-
+		return antall;
 	}
 
 	/**
@@ -65,13 +61,7 @@ public class KortSamling {
 	 */
 	public boolean erTom() {
 
-		for (int i = 0; i < samling.length; i++) {
-			if (!(samling[i] == null)) {
-				return false;
-			}
-		}
-		return true;
-
+		return antall == 0;
 	}
 
 	/**
@@ -81,18 +71,13 @@ public class KortSamling {
 	 */
 	public void leggTil(Kort kort) {
 
-		int ledigPlassIndex = 0;
-		// sjekker f�rste ledige index i arrayen
 		for (int i = 0; i < samling.length; i++) {
 			if (samling[i] == null) {
-				ledigPlassIndex = i;
+				samling[i] = kort;
+				antall++;
 				break;
 			}
 		}
-		samling[ledigPlassIndex] = kort;
-		// denne metoden vil alltid legge til nytt kort i index 0 dersom kortstokken er
-		// full
-
 	}
 
 	/**
@@ -101,16 +86,16 @@ public class KortSamling {
 	 */
 	public void leggTilAlle() {
 
-		int teller = 0;
+		fjernAlle();
+
 		for (Kortfarge farge : Kortfarge.values()) {
 			for (int i = 1; i < Regler.MAKS_KORT_FARGE + 1; i++) {
 				Kort kort = new Kort(farge, i);
-				samling[teller] = kort;
-				teller++;
+				samling[antall] = kort;
+				antall++;
 			}
 		}
 		// Husk: bruk Regler.MAKS_KORT_FARGE for å få antall kort per farge
-
 	}
 
 	/**
@@ -119,6 +104,7 @@ public class KortSamling {
 	public void fjernAlle() {
 
 		samling = new Kort[MAKS_KORT];
+		antall = 0;
 
 	}
 
@@ -149,6 +135,7 @@ public class KortSamling {
 			if (!(samling[i] == null)) {
 				Kort kort = new Kort(samling[i].getFarge(), samling[i].getVerdi());
 				samling[i] = null;
+				antall--;
 				return kort;
 			}
 		}
@@ -168,21 +155,17 @@ public class KortSamling {
 		if (kort == null) {
 			return false;
 		}
-		boolean harKort = false;
-		int i = 0;
-		while (i < samling.length && !harKort) {
-			if (!(samling[i] == null)) {
-				if (samling[i].getVerdi() == kort.getVerdi() && samling[i].getFarge() == kort.getFarge()) {
-					harKort = true;
 
+		int i = 0;
+		while (i < samling.length) {
+			if (!(samling[i] == null)) {
+				if (kort.equals(samling[i])) {
+					return true;
 				}
 			}
 			i++;
 		}
-
-		return harKort;
-		// return false;
-
+		return false;
 	}
 
 	/**
@@ -200,12 +183,11 @@ public class KortSamling {
 		if (kort == null) {
 			return false;
 		}
-		// Sjekker at posisjonen i samling ikke er null f�r vi sjekker om kortet
-		// matcher. Om det matcher setter vi verdien til null.
 		for (int i = 0; i < samling.length; i++) {
 			if (!(samling[i] == null)) {
-				if (samling[i].getFarge() == kort.getFarge() && samling[i].getVerdi() == kort.getVerdi()) {
+				if (kort.equals(samling[i])) {
 					samling[i] = null;
+					antall--;
 					return true;
 				}
 			}
@@ -224,7 +206,7 @@ public class KortSamling {
 	public Kort[] getAllekort() {
 
 		int kortstokkTeller = 0;
-		Kort[] kortstokk = new Kort[getAntalKort()];
+		Kort[] kortstokk = new Kort[antall];
 		for (int i = 0; i < samling.length; i++) {
 			if (!(samling[i] == null)) {
 				kortstokk[kortstokkTeller] = samling[i];

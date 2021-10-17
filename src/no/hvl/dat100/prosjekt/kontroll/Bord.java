@@ -13,98 +13,65 @@ import no.hvl.dat100.prosjekt.modell.Kort;
  */
 public class Bord {
 
-	private KortSamling bunkeFra;
-	private KortSamling bunkeTil;
+	private final KortSamling bunkeFra;
+	private final KortSamling bunkeTil;
 	
 	/**
 	 * Metoden oppretter to bunker, til- og fra-bunken
 	 * Alle kortene legges til fra-bunken. 
 	 */
 	public Bord() {
-		
-		// TODO - START
-		
-		throw new UnsupportedOperationException(TODO.constructor("Bord"));
-		// TODO - END
+		bunkeFra = new KortSamling();
+		bunkeFra.leggTilAlle();
+		bunkeTil = new KortSamling();
 	}
 	
 	/**
 	 * Gir peker/referanse til til-bunken.
-	 * 
 	 * @return referanse/peker til til-bunken.
 	 */
 	public KortSamling getBunkeTil() {
-		
 		return bunkeTil;
-		
 	}
 
 	/**
 	 * Gir peker/referanse til fra-bunken.
-	 * 
 	 * @return referanse/peker til fra-bunken.
 	 */
 	public KortSamling getBunkeFra() {
-		
 		return bunkeFra;
-		
 	}
 	
 	/**
 	 * Sjekker om til-bunken er tom.
-	 * 
 	 * @return true om til-bunken er tom, false ellers.
 	 */
 	public boolean bunketilTom() {
-		
-		// TODO - START
-				
-		throw new UnsupportedOperationException(TODO.method());
-
-		// TODO - END
+		return bunkeTil.erTom();
 	}
 
 	/**
 	 * Sjekker om fra-bunken er tom.
-	 * 
 	 * @return true om fra-bunken er tom, false ellers.
 	 */
 	public boolean bunkefraTom() {
-		
-		// TODO - START
-		
-		throw new UnsupportedOperationException(TODO.method());
-	
-		// TODO - END
-		
+		return bunkeFra.erTom();
 	}
 	
 	/**
 	 * Gir antall kort i fra-bunken.
-	 * 
 	 * @return antall kort i fra-bunken.
 	 */
 	public int antallBunkeFra() {
-		
-		// TODO - START
-		
-		throw new UnsupportedOperationException(TODO.method());
-
-		// TODO - END
+		return bunkeFra.getAntalKort();
 	}
 
 	/**
 	 * Gir antall kort i til-bunken.
-	 * 
 	 * @return antall kort i til-bunken.
 	 */
 	public int antallBunkeTil() {
-		
-		// TODO - START
-		
-		throw new UnsupportedOperationException(TODO.method());
-
-		// TODO - END
+		return bunkeTil.getAntalKort();
 	}
 	
 	/**
@@ -112,42 +79,25 @@ public class Bord {
 	 * billedsiden opp, men det trenger ikke gruppen tenke på).
 	 */
 	public void vendOversteFraBunke() {
-		
-		// TODO - START
-		
-		throw new UnsupportedOperationException(TODO.method());
-		// TODO - END
-		
+		bunkeTil.leggTil(bunkeFra.taSiste());
 	}
 		
 	/**
 	 * Tar øverste kortet fra fra-bunken.
-	 * 
 	 * @return peker/referanse til det kort som blev tatt fra fra-bunken
 	 */
 	
 	public Kort taOversteFraBunke() {
-		
-		// TODO - START
-		
-		throw new UnsupportedOperationException(TODO.method());
-
-		// TODO - END
+		return bunkeFra.taSiste();
 	}
 	
 	/**
 	 * Metode som leser øverste kortet i til-bunken. Kortet vil fremdeles være
 	 * øverst i til-bunken etter at metoden er utført.
-	 * 
 	 * @return peker/referanse til øverste kortet i til-bunken.
 	 */
 	public Kort seOversteBunkeTil() {
-		
-		// TODO - START
-		
-		throw new UnsupportedOperationException(TODO.method());
-
-		// TODO - END
+		return bunkeTil.seSiste();
 	}
 	
 	/**
@@ -158,25 +108,23 @@ public class Bord {
 	 */
 	public void snuTilBunken() {
 
-		// TODO - START
-		
-		throw new UnsupportedOperationException(TODO.method());
-		// TODO - END
+		if(bunkeFra.getAntalKort() == 0){
+			Kort sisteTilKort = bunkeTil.taSiste();
+
+			bunkeTil.fjernAlle();
+			bunkeTil.leggTil(sisteTilKort);
+
+			bunkeFra.leggTilAlle();
+			bunkeFra.fjern(sisteTilKort);
+			KortUtils.stokk(bunkeFra);
+		}
 	}
 		
 	/**
-	 * Metode som legger et kort i til-bunken. 
-	 * 
-	 * @param k
-	 * 			kort som skal legges ned. 
-	 * 	
+	 * Metode som legger et kort i til-bunken.
+	 * @param k kort som skal legges ned.
 	 */
 	public void leggNedBunkeTil(Kort k) {
-		
-		// TODO - START
-		
-		throw new UnsupportedOperationException(TODO.method());
-		// TODO - END
-				
+		bunkeTil.leggTil(k);
 	}
 }
